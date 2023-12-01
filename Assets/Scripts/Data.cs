@@ -13,6 +13,7 @@ public class Data : MonoBehaviour
 
     public int highScore = 0;
     public string highScorePlayerName = "Player";
+
     private void Awake() 
     {
         // Singleton pattern
@@ -57,6 +58,7 @@ public class Data : MonoBehaviour
         string path = Application.persistentDataPath + "/savefile.json";
         string json = JsonUtility.ToJson(this);
         File.WriteAllText(path, json);
+        Debug.Log("Saved to " + path);
     }
 
     public void LoadData() 
