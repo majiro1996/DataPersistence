@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Data.Instance.LoadData();
         highScoreText.text = "Best Score: " + Data.Instance.highScorePlayerName + " - " + Data.Instance.highScore;
     }
 
@@ -18,12 +19,15 @@ public class MenuManager : MonoBehaviour
         
     }
 
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Debug.Log("Quit");
+        Data.Instance.SaveData();
         Application.Quit();
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
         Debug.Log("Start");
         UnityEngine.SceneManagement.SceneManager.LoadScene("main");
     }

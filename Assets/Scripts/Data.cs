@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
+
+[System.Serializable]
 public class Data : MonoBehaviour
 {
     public static Data Instance;
@@ -46,6 +49,23 @@ public class Data : MonoBehaviour
         {
             highScore = score;
             highScorePlayerName = playerName;
+        }
+    }
+
+    public void SaveData() 
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+        string json = JsonUtility.ToJson(this);
+        File.WriteAllText(path, json);
+    }
+
+    public void LoadData() 
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+        if (File.Exists(path)) 
+        {
+            string json = File.ReadAllText(path);
+            JsonUtility.FromJsonOverwrite(json, this);
         }
     }
 
